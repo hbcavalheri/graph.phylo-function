@@ -1,0 +1,81 @@
+graph.phylo 	                      package:unknown                                                R Documentation
+
+Representação gráfica da diferença de atributos entre comunidades
+
+Description
+Esta função retorna uma filogenia com informações contínuas ou categóricas para cada terminal. 
+Uso
+graph.phylo(x, y, phy, bks="FD", color="gray", 
+            direction="rightwards", type="phylogram", 
+            legend="sem dados", position1="topleft", 
+            position2="bottomleft", show.tip.label=TRUE, 
+            label.offset=0.3, cex.tip=3, pch.tip=19, 
+            cex.leg=1, pch.nd=20, cex.nd=1.5,cex.leg.nd=1, 
+            bty="n", col.nd="black",show.node.label=FALSE, 
+            edge.color="black", edge.width=1, 
+            edge.lty=1, font=3, no.margin=TRUE)
+
+Argumentos
+x	data frame que contém na primeira coluna o nome dos terminais e nas seguintes as variáveis (as quais podem ser da classe “numeric” ou “factor”). 
+y	o número da coluna que corresponde a variável que será mostrada nos terminais da filogenia. 
+phy			objeto da classe “phylo”.
+bks	divide uma variável contínua em classes segundo a fórmula de Sturges, Scott ou Freedman-Diaconis. É especificado como: “Sturges”, “Scott” e “FD”, mas aceita também um vetor com as quebras das classes.
+color	indica qual escala de cor será usada para mostrar a variável nos terminais da filogenia. As opções são: “gray” (default), “heat” e “rainbow”.
+direction	especifica a direção da filogenia. São quatro possibilidades: "rightwards" (default), "leftwards", "upwards" e "downwards".
+type	especifica o tipo de filogenia que será desenhada, deve ser uma das seguintes opções: "phylogram" (default), "cladogram", "fan", "unrooted" ou "radial".
+legend	especifica o que aparecerá na legenda dos terminais que não contém dados.
+position1 	posição da legenda relativa aos dados mostrados nos terminais da filogenia.
+position2 		posição da legenda relativa aos terminais sem dados.
+show.tip.label 	argumento lógico que indica se os nomes dos terminais devem aparecer na filogenia (default é TRUE, i.e. os nomes serão mostrados).
+label.offset 	argumento numérico que indica o espaço entre os nós e os terminais da filogenia e os nomes dos terminais correspondentes. Esta opção não tem efeito se o type = "unrooted".
+cex.tip 	argumento numérico que indica a escala dos símbolos dos terminais da filogenia. 
+pch.tip 	 argumento numérico que fornece o tipo de símbolo que será mostrado nos terminais da filogenia. 
+cex.leg 		argumento numérico que fornece a escala da legenda dos dados. 
+pch.nd 	argumento numérico que indica o tipo de símbolo será usado para os terminais que não possuem dados.
+cex.nd 	argumento numérico que indica a escala dos símbolos usados para indicar terminais sem dados.
+cex.leg.nd	argumento numérico que indica a escala da legenda relativa aos terminais sem dados. 
+bty	o tipo de caixa que será desenhada ao redor da legenda. Os valores permitidos são: "o" (default) e "n".
+col.nd		cor atribuída ao símbolo dos terminais sem dados.
+show.node.label 	argumento lógico que indica se os nós da filogenia devem ser mostrados (default é FALSE, i.e. os nós não serão mostrados).
+edge.color	um vetor de caracteres que fornece as cores que serão usadas nos ramos da filogenia. As cores devem estar na mesma ordem que os componentes edge da filogenia. Se poucas cores forem fornecidas, elas serão recicladas. 
+edge.width 	um vetor numérico que indica a largura da linha dos ramos da filogenia. As cores devem estar na mesma ordem que os componentes edge da filogenia. Se poucas largurasforem fornecidas, elas serão recicladas. 
+edge.lty	o mesmo que o argumento anterior, mas para tipos de linhas. As opções são 1: contínua, 2: tracejada, 3: pontilhada, 4: pontos e traços, 5: tracejado longo, 6: dois tracejados.
+font 	argumento numérico que especifica o tipo de fonte usada nos nós e nos terminais se estes forem TRUE. As seguintes opções são permitidas: 1 (texto simples), 2 (negrito), 3 (itálico, default) ou 4 (negrito itálico).
+no.margin	argumento lógico. Se TRUE, as margens serão zero e a figura usará todo o espaço do dispositivo gráfico.
+
+Detalhes
+Necessita que o pacote ape esteja carregado na área de trabalho.
+Este gráfico é útil para comparar atributos entre comunidades, pois permite usar filogenias de pool regional de espécies, onde NA indica espécies que não ocorrem na comunidade e as espécies que ocorrem são reconhecidas pela presença de dados. Além de permitir, também, que espécies que ocorrem na comunidade, mas que não possuem dados sejam marcadas pela sua ocorrência. Estas espécies devem ter os dados das variáveis contínuas e categóricas como zero. 
+Outro aspecto importante na comparação entre atributos para comunidades diferentes é que a função permite escolher as quebras das classes das variáveis contínuas. Então, o usuário pode escolher classes das variáveis contínuas de acordo com a amplitude de todas as espécies de todas as comunidades. Isso é possível porque a função não possui restrição de quebra de classes de acordo com o mínimo e o máximo dos dados.
+As variáveis categóricas devem ser especificadas por diferentes letras e não números.
+Para variáveis categóricas a escala de cor “heat” e “rainbow” retorna uma escala de cores sem padrão.
+Se a variável escolhida for categórica, então, independente de qualquer especificação no argumento bks, a função usará os níveis dos fatores nos terminais da filogenia, os quais estarão especificados na legenda.
+Se em bks for fornecido um vetor e os valores das quebras das classes não abrangerem o máximo valor dos dados, então os valores que não estiverem compreendidos nas classes serão especificados como da classe que contém os maiores valores.
+
+Valores
+graph.phylo retorna ao usuário uma figura no dispositivo gráfico ativado que contém a filogenia com a variável escolhida evidenciada nos terminais, de acordo com as especificações de cor, tamanho e tipo. Além de legendas que especificam as classes das variáveis contínuas e os níveis dos fatores das variáveis categóricas.
+
+Autor
+Hamanda Badona Cavalheri (hbcavalheri@gmail.com).
+
+Ver também
+plot.phylo, tiplabels for the package ape.
+
+Exemplos
+phy <- read.tree(text = "((sp1,sp2),(((sp3,sp4),sp5),(((sp6,sp7),sp8), (sp9,sp10))));")
+phy
+plot(phy)
+tam <- c(100,0,84,NA,67,NA,44,58,0,60)
+sp <- c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10")
+habitat <- c("F",0, "A", NA, "A", NA, "Q", "F", 0, "Q")
+tam <- data.frame(tam, habitat)
+rownames(tam) <- sp
+graph.phylo(tam,1,phy) ### dados contínuos ###
+graph.phylo(tam,2,phy, color ="heat") ### dados categóricos ###
+graph.phylo(tam,1,phy, bks=c(43,66,87,100), col.nd="green", type="cladogram") ### definindo a quebra das classes ###
+
+
+
+
+
+
