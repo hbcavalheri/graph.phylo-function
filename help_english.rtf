@@ -1,77 +1,0 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;\red27\green31\blue34;\red255\green255\blue255;}
-{\*\expandedcolortbl;;\cssrgb\c14118\c16078\c18039;\cssrgb\c100000\c100000\c100000;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-
-\f0\fs24 \cf0 graph.phylo 	                      package:unknown                                                R Documentation\
-\
-Plot that shows difference in traits among ecological communities.\
-\
-Description\
-\pard\pardeftab720\partightenfactor0
-\cf2 \cb3 \expnd0\expndtw0\kerning0
-Returns a phylogeny containing info about continuous or categorical traits in the tips.\cf0 \cb1 \kerning1\expnd0\expndtw0  \
-\
-Use\
-graph.phylo(x, y, phy, bks = \'93FD", color = \'93gray", \
-            direction = \'93rightwards", type = \'93phylogram", \
-            legend = \'93sem dados", position1 = \'93topleft", \
-            position2 = \'93bottomleft", show.tip.label = TRUE, \
-            label.offset = 0.3, cex.tip = 3, pch.tip = 19, \
-            cex.leg = 1, pch.nd = 20, cex.nd = 1.5, cex.leg.nd = 1, \
-            bty = \'93n\'94, col.nd = \'93black", show.node.label = FALSE, \
-            edge.color = \'93black", edge.width = 1, \
-            edge.lty = 1, font = 3, no.margin = TRUE)\
-\
-Arguments\
-x	data.frame cottoning in the first column the name of the species (tips) and the remaining columns are variables, which can be either numerical or factor.\
-y	the number of the column that corresponds to the variable that will be shown in the plot.\
-phy	object of the class phylo.\
-bks	divides a continuous variable in classes following Sturges, Scott or Freedman-Diaconis. Specify as \'93Sturges\'94, \'93Scott\'94 or \'93FD\'94, also accepts a vector with breaks specified.\
-color	color that will be used to show the variable in the tips of the phylogeny. The options are: \'93gray\'94 (default), \'93heat\'94 and \'93rainbow\'94.\
-direction	phylogeny direction: \'93rightwards\'94 (default), \'93leftwards\'94, \'93upwards\'94 and \'93downwards\'94.\
-type	type of phylogeny: \'93phylogram\'94 (default), \'93cladogram\'94, \'93fan\'94, \'93unrooted\'94 and \'93radial\'94.\
-legend	specifies what should appear in tips that do not have information for the variable.\
-position1	legend position regarding tips with data\
-position2	legend position regarding tips with no data\
-show.tip.label	logic argument indicating names on tips. Default = TRUE\
-label.offset	numeric argument indicating the space between the nodes and the tips. It has not effect if type = \'93unrooted\'94.\
-cex.tip		numeric argument indicating the size of the symbols in the tips.\
-pch.tip		numeric argument showing the type of symbol shown in the tips.\
-cex.leg	numeric argument for the size of the legend.\
-pch.nd	numeric argument indicating the symbol to be used in the tips with no data.\
-cex.nd		numeric argument for the size of the symbols used in the tips with no data.\
-cex.leg.nd	numeric argument indicating the distance between legend and tips with no data.\
-bty	box to be used around legend: \'93o\'94 (default) or \'93n\'94.\
-col.nd		color for the symbols plotted in the tips with no data.\
-show.node.label	logic argument indicating if the nodes should be labelled. Default is FALSE.\
-edge.color	vector providing color to be used in the branches of the phylogeny.\
-edge.width	vector providing the width of the branches.\
-edge.lty	vector providing line type for the branches.\
-font	numeric argument to specify type of font to be used in the tips.\
-no.margin	logo argument. If TRUE margins will be zero and plot occupies all space in the plot device.\
-\
-Details\
-Package \'93ape\'94 should be loaded first. This function provides comparison of traits among ecological communities, since allows plotting the phylogeny of the regional pool of species, where NA indicates the species that are not present in the community.\
-\
-Values\
-graph.phylo returns a plot containing a phylogeny showing in the tips a variation among species for a specific trait.\
-\
-Author\
-Hamanda Badona Cavalheri\
-\
-Exemples\
-phy <- read.tree(text = "((sp1,sp2),(((sp3,sp4),sp5),(((sp6,sp7),sp8), (sp9,sp10))));")\
-phy\
-plot(phy)\
-tam <- c(100,0,84,NA,67,NA,44,58,0,60)\
-sp <- c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10")\
-habitat <- c("F",0, "A", NA, "A", NA, "Q", "F", 0, "Q")\
-tam <- data.frame(tam, habitat)\
-rownames(tam) <- sp\
-graph.phylo(tam,1,phy) ### dados cont\'ccnuos ###\
-graph.phylo(tam,2,phy, color ="heat") ### dados categ\'dbricos ###\
-graph.phylo(tam,1,phy, bks=c(43,66,87,100), col.nd="green", type="cladogram") ### definindo a quebra das classes ###\
-}
