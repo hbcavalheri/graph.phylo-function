@@ -129,7 +129,7 @@ graph.phylo <- function(x, y, phy, bks="FD",color="gray",
   }
   else
   {
-    cat("objeto phy não é da classe phylo")
+    cat("objeto phy nÃ£o Ã© da classe phylo")
   }
 }
 
