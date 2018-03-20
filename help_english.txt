@@ -1,0 +1,67 @@
+graph.phylo 	                      package:unknown                                                R Documentation
+
+Plot that shows difference in traits among ecological communities.
+
+Description
+Returns a phylogeny containing info about continuous or categorical traits in the tips. 
+
+Use
+graph.phylo(x, y, phy, bks = “FD", color = “gray", 
+            direction = “rightwards", type = “phylogram", 
+            legend = “sem dados", position1 = “topleft", 
+            position2 = “bottomleft", show.tip.label = TRUE, 
+            label.offset = 0.3, cex.tip = 3, pch.tip = 19, 
+            cex.leg = 1, pch.nd = 20, cex.nd = 1.5, cex.leg.nd = 1, 
+            bty = “n”, col.nd = “black", show.node.label = FALSE, 
+            edge.color = “black", edge.width = 1, 
+            edge.lty = 1, font = 3, no.margin = TRUE)
+
+Arguments
+x	data.frame cottoning in the first column the name of the species (tips) and the remaining columns are variables, which can be either numerical or factor.
+y	the number of the column that corresponds to the variable that will be shown in the plot.
+phy	object of the class phylo.
+bks	divides a continuous variable in classes following Sturges, Scott or Freedman-Diaconis. Specify as “Sturges”, “Scott” or “FD”, also accepts a vector with breaks specified.
+color	color that will be used to show the variable in the tips of the phylogeny. The options are: “gray” (default), “heat” and “rainbow”.
+direction	phylogeny direction: “rightwards” (default), “leftwards”, “upwards” and “downwards”.
+type	type of phylogeny: “phylogram” (default), “cladogram”, “fan”, “unrooted” and “radial”.
+legend	specifies what should appear in tips that do not have information for the variable.
+position1	legend position regarding tips with data
+position2	legend position regarding tips with no data
+show.tip.label	logic argument indicating names on tips. Default = TRUE
+label.offset	numeric argument indicating the space between the nodes and the tips. It has not effect if type = “unrooted”.
+cex.tip		numeric argument indicating the size of the symbols in the tips.
+pch.tip		numeric argument showing the type of symbol shown in the tips.
+cex.leg	numeric argument for the size of the legend.
+pch.nd	numeric argument indicating the symbol to be used in the tips with no data.
+cex.nd		numeric argument for the size of the symbols used in the tips with no data.
+cex.leg.nd	numeric argument indicating the distance between legend and tips with no data.
+bty	box to be used around legend: “o” (default) or “n”.
+col.nd		color for the symbols plotted in the tips with no data.
+show.node.label	logic argument indicating if the nodes should be labelled. Default is FALSE.
+edge.color	vector providing color to be used in the branches of the phylogeny.
+edge.width	vector providing the width of the branches.
+edge.lty	vector providing line type for the branches.
+font	numeric argument to specify type of font to be used in the tips.
+no.margin	logo argument. If TRUE margins will be zero and plot occupies all space in the plot device.
+
+Details
+Package “ape” should be loaded first. This function provides comparison of traits among ecological communities, since allows plotting the phylogeny of the regional pool of species, where NA indicates the species that are not present in the community.
+
+Values
+graph.phylo returns a plot containing a phylogeny showing in the tips a variation among species for a specific trait.
+
+Author
+Hamanda Badona Cavalheri
+
+Exemples
+phy <- read.tree(text = "((sp1,sp2),(((sp3,sp4),sp5),(((sp6,sp7),sp8), (sp9,sp10))));")
+phy
+plot(phy)
+tam <- c(100,0,84,NA,67,NA,44,58,0,60)
+sp <- c("sp1", "sp2", "sp3", "sp4", "sp5", "sp6", "sp7", "sp8", "sp9", "sp10")
+habitat <- c("F",0, "A", NA, "A", NA, "Q", "F", 0, "Q")
+tam <- data.frame(tam, habitat)
+rownames(tam) <- sp
+graph.phylo(tam,1,phy) ### dados contÌnuos ###
+graph.phylo(tam,2,phy, color ="heat") ### dados categÛricos ###
+graph.phylo(tam,1,phy, bks=c(43,66,87,100), col.nd="green", type="cladogram") ### definindo a quebra das classes ###
